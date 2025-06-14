@@ -21,5 +21,11 @@
         "noFallthroughCasesInSwitch": true,
         "noUncheckedSideEffectImports": true
     },
-    "include": ["vite.config.ts", "codegen.ts"]
+    "include": [
+        "vite.config.ts",
+        "codegen.ts",
+        "vitest.shims.d.ts",
+        "vitest.workspace.ts",
+        ".storybook/*.ts"
+    ]
 }

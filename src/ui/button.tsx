@@ -4,13 +4,22 @@ interface ButtonProps
     extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'className'> {
     children: React.ReactNode;
     className?: string;
+    size?: 'small' | 'large';
 }
-export default function Button({ children, className, ...rest }: ButtonProps) {
+export default function Button({
+    children,
+    size = 'large',
+    className,
+    ...rest
+}: ButtonProps) {
     return (
         <button
             className={cn(
-                'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded',
-                className
+                'bg-blue-500 hover:bg-blue-700 text-white font-bold rounded',
+                className,
+
+                size === 'small' && 'text-xs py-1 px-2',
+                size === 'large' && 'text-lg py-2 px-4'
             )}
             {...rest}
         >
