@@ -48,6 +48,18 @@ export default function CategoriesProvider({
         []
     );
 
+    // I am using the URLSearchParams to get the selected items from the URL.
+    // This is to ensure that when the user refresh browser page, the selected items are still there.
+    useEffect(() => {
+        const searchParams = new URLSearchParams(window.location.search);
+        const selectedItems = searchParams.get('selectedItems');
+        if (selectedItems) {
+            setSelectedCategories(
+                selectedItems.split(',').map(dummyObjectMapper)
+            );
+        }
+    }, []);
+
     // Arrange the categories in the initial state and reset categories when the search term is empty
     // This is to ensure that when the user clears the search, we show all categories again.
     useEffect(() => {
@@ -90,6 +102,24 @@ export default function CategoriesProvider({
         }
     }
 
+    function onCategoriesApplied(appliedCategories: Categories) {
+        const searchParams = new URLSearchParams();
+        // If there are applied categories, we update the URL with the selected items
+        if (appliedCategories.length > 0) {
+            const searchParams = new URLSearchParams();
+            searchParams.set(
+                'selectedItems',
+                appliedCategories.map(c => c.name).join(',')
+            );
+            window.history.replaceState({}, '', `?${searchParams.toString()}`);
+            return;
+        }
+
+        // If there are no applied categories, we remove the selected items from the URL
+        searchParams.delete('selectedItems');
+        window.history.replaceState({}, '', `?${searchParams.toString()}`);
+    }
+
     const isLoading = lazyCategories.loading || allCategories.loading;
     const errorMessage = allCategories.error
         ? allCategories.error.message
@@ -104,6 +134,7 @@ export default function CategoriesProvider({
                 selectedCategories,
                 onCategorySelected,
                 onCategoriesSearch: setSearchTerm,
+                onCategoriesApplied,
             }}
         >
             {children}

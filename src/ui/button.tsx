@@ -15,7 +15,7 @@ export default function Button({
     return (
         <button
             className={cn(
-                'bg-blue-500 hover:bg-blue-700 text-white font-bold rounded',
+                'bg-blue-500 hover:bg-blue-700 text-white font-bold rounded disabled:opacity-50 disabled:pointer-events-none',
                 className,
 
                 size === 'small' && 'text-xs py-1 px-2',
