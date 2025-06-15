@@ -16,14 +16,12 @@ export default function Card({
     return (
         <div
             className={cn(
-                `border border-gray-400 bg-gray-100 rounded-sm p-4`,
+                `border border-gray-400 bg-gray-100/40 rounded-sm p-8`,
                 className
             )}
             {...rest}
         >
-            {cardTitle && (
-                <h3 className="text-lg font-semibold mb-2">{cardTitle}</h3>
-            )}
+            {cardTitle && <h3 className="text-lg  mb-4">{cardTitle}</h3>}
             {children}
         </div>
     );

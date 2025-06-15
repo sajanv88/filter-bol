@@ -1,12 +1,15 @@
 import type { CodegenConfig } from '@graphql-codegen/cli';
 
 const config: CodegenConfig = {
-    schema: 'http://localhost:4000/graphql',
+    schema: 'https://gql.dev.sajankumarv.tech/graphql',
     documents: ['src/**/*.{ts,tsx}'],
     generates: {
         './src/libs/__generated__/': {
             preset: 'client',
             plugins: [],
+            config: {
+                useTypeImports: true,
+            },
             presetConfig: {
                 gqlTagName: 'gql',
             },

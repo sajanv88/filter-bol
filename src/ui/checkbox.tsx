@@ -11,19 +11,23 @@ export default function Checkbox({
     labelText,
     ...rest
 }: CheckboxProps) {
+    const identifierText = labelText.toLowerCase();
     return (
-        <label className="inline-flex items-center">
+        <span className="inline-flex items-center">
             <input
+                id={identifierText}
                 type="checkbox"
                 className={cn(
-                    `appearance-none w-8 h-8 border-2 rounded-none border-gray-300 relative
-                 checked:before:content-['']  checked:before:absolute checked:before:block checked:before:w-5 
-                 checked:before:h-5 checked:before:top-[4px] checked:before:left-[4px] checked:before:bg-blue-600`,
+                    `appearance-none w-5 h-5 border-2 rounded-none border-gray-300 relative
+                 checked:before:content-['']  checked:before:absolute checked:before:block checked:before:w-3 
+                 checked:before:h-3 checked:before:top-[2px] checked:before:left-[2px] checked:before:bg-blue-600`,
                     className
                 )}
                 {...rest}
             />
-            <span className="ml-2">{labelText}</span>
-        </label>
+            <label className="ml-2" htmlFor={identifierText}>
+                {labelText}
+            </label>
+        </span>
     );
 }
