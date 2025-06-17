@@ -76,11 +76,17 @@ export default function GenericFilter<F extends FilterItemType>({
                         <SearchInput onSearchEvent={onSearchEvent} />
                     )}
                     {selectedItems.length > 0 && (
-                        <div className="flex flex-wrap gap-2">
+                        <div
+                            className="flex flex-wrap gap-2"
+                            data-testid="selected-items-container"
+                        >
                             {selectedItems.map(onRenderBadge)}
                         </div>
                     )}
-                    <div className="flex flex-col space-y-4 max-h-[17.8rem] overflow-y-auto">
+                    <div
+                        className="flex flex-col space-y-4 max-h-[17.8rem] overflow-y-auto"
+                        data-testid="rendered-items-container"
+                    >
                         {items.map(onRenderItem)}
                     </div>
                     <Button
